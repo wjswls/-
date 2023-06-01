@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Behavior</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="utils.js"></script>
+</head>
+
+
+<body>
+    <div class="grid-control">
+        <h1>Hello</h1>
+        <p> This is a </p>
+
+
+        <div style="display: flex; justify-content: center;">
+            <div style="padding: 20px;">
+                <label for="visibility" style="padding-bottom: 10px;">Visibility:</label>
+                <input type="range" min="10" max="40" value="25" id="visibility" onchange="disableVisSlider()">
+                <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
+                        id="visibilityValue">25</span></p>
+            </div>
+
+            <div style="padding: 20px;">
+                <label for="mobility" style="padding-bottom: 10px;">Mobility:</label>
+                <input type="range" min="10" max="40" value="25" id="mobility" onchange="disableMobSlider()">
+                <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
+                        id="mobilityValue">25</span></p>
+            </div>
+
+            <div style="padding: 20px;">
+                <label for="diversity" style="padding-bottom: 10px;">Diversity:</label>
+                <input type="range" min="2" max="8" value="5" id="diversity" onchange="disableDivSlider()">
+                <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
+                        id="diversityValue">5</span></p>
+            </div>
+
+            <input type="button" value="Confirm" onclick="storeAndDisable()">
+
+        </div>
+
+        <input id="playButton" type="button" value="Play" onclick="play()">
+        <input id="replay" type="button" value="Replay" onclick="clearGame()">
+        <button onclick="location.reload();">Refresh Page</button>
+
+
+    </div>
+
+    <div class="grid-svg">
+        <svg id="basesvg"></svg>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script type="module">
+        import {storeAndDisable} from './script.js';
+      
+        document.getElementById('confirmButton').addEventListener('click', storeAndDisable);
+      </script>
+
+    </div>
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(182, 148, 185); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+p{
+    color: aliceblue;
+}
+
+label{
+    color: white;
+    display: block;
+    font-size: medium;
+    font-weight:500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+#visibility {
+    background: #ddd;
+    outline: none;
+
+}
+
+#mobility {
+    background: #ddd;
+    outline: none;
+}
+
+
+
+.container {
+    display: grid; 
+    grid-template-columns: 50% 50%; 
+    grid-template-rows: 100px 50%;  
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "grid-title grid-title"
+      "grid-svg grid-svg"
+  }
+
+.grid-svg {
+    grid-area: grid-svg;
+    text-align: center;
+
+}
+
+.grid-title {
+    grid-area: grid-title;
+}
+
+.grid-control {
+    grid-area: grid-control;
+    text-align: center;
+}
+
+
