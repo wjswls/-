@@ -18,33 +18,36 @@
 
 
         <div style="display: flex; justify-content: center;">
+
             <div style="padding: 20px;">
                 <label for="visibility" style="padding-bottom: 10px;">Visibility:</label>
-                <input type="range" min="10" max="40" value="25" id="visibility" onchange="disableVisSlider()">
+                <input type="range" min="10" max="40" value="25" id="visibility" oninput="updateVisSlider()">
                 <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
                         id="visibilityValue">25</span></p>
             </div>
 
             <div style="padding: 20px;">
                 <label for="mobility" style="padding-bottom: 10px;">Mobility:</label>
-                <input type="range" min="10" max="40" value="25" id="mobility" onchange="disableMobSlider()">
+                <input type="range" min="10" max="40" value="25" id="mobility" oninput="updateMobSlider()">
                 <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
                         id="mobilityValue">25</span></p>
             </div>
 
             <div style="padding: 20px;">
                 <label for="diversity" style="padding-bottom: 10px;">Diversity:</label>
-                <input type="range" min="2" max="8" value="5" id="diversity" onchange="disableDivSlider()">
+                <input type="range" min="2" max="8" value="5" id="diversity" oninput="updateDivSlider()">
                 <p style="font-size: small; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Value: <span
                         id="diversityValue">5</span></p>
             </div>
-
             <input type="button" value="Confirm" onclick="storeAndDisable()">
-
         </div>
 
         <input id="playButton" type="button" value="Play" onclick="play()">
-        <input id="replay" type="button" value="Replay" onclick="clearGame()">
+
+        <input id="SetupButton" type="button" value="Set-up & Replay" onclick="clearGame()">
+
+
+
         <button onclick="location.reload();">Refresh Page</button>
 
 
@@ -55,18 +58,7 @@
     </div>
 
     <script type="module" src="script.js"></script>
-    <script type="module">
-        import {storeAndDisable} from './script.js';
-      
-        document.getElementById('confirmButton').addEventListener('click', storeAndDisable);
-      </script>
-
     </div>
-
-
-    <script>
-
-    </script>
 </body>
 
 </html>
