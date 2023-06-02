@@ -1,10 +1,58 @@
+function updateVisSlider() {
+    let slider = document.getElementById('visibility');
+    document.getElementById("visibilityValue").textContent = slider.value;
+}
+
+function updateMobSlider() {
+    let slider = document.getElementById('mobility');
+    document.getElementById("mobilityValue").textContent = slider.value;
+}
+
+function updateDivSlider() {
+    let slider = document.getElementById('diversity');
+    document.getElementById("diversityValue").textContent = slider.value;
+}
+
+let visibility, mobility, diversity;
+
+function disableVisSlider() {
+    let slider = document.getElementById('visibility');
+    slider.disabled = true;
+    visibility = slider.value;
+    document.getElementById("visibilityValue").textContent = visibility;
+}
+
+function disableMobSlider() {
+    let slider = document.getElementById('mobility');
+    slider.disabled = true;
+    mobility = slider.value;
+    document.getElementById("mobilityValue").textContent = mobility;
+}
+
+function disableDivSlider() {
+    let slider = document.getElementById('diversity');
+    slider.disabled = true;
+    diversity = slider.value;
+    document.getElementById("diversityValue").textContent = diversity;
+}
+
+function storeAndDisable() {
+    disableVisSlider();
+    disableMobSlider();
+    disableDivSlider();
+    console.log('Visibility:', visibility);
+    console.log('Mobility:', mobility);
+    console.log('Diversity:', diversity);
+
+}
+
 
 
 
 
 const colors = {
     yellow: [252, 186, 3],
-    aqua:[127, 255, 212],
+    aqua: [127, 255, 212],
     lightpink: [255, 182, 193],
     blue: [2, 202, 247],
     red: [242, 70, 85],
@@ -77,7 +125,7 @@ function makeSquare(x, y, width, height) {
     return newSquare;
 }
 
-function generateNewSVG(){
+function generateNewSVG() {
     let blankSheet = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     blankSheet.setAttribute("x", 0);
     blankSheet.setAttribute("y", 0);
@@ -108,7 +156,7 @@ function makeGrey() {
 }
 
 function getRandomBoolean() {
-    let index = getRandom(0,10  );
+    let index = getRandom(0, 10);
     if (index == 1) {
         return true;
     } return false;
@@ -205,20 +253,20 @@ function drawBlock(x, y, height, color) {
     return svgGroup;
 }
 
-function colorPicker(max){
-    let index = getRandom(0,max);
+function colorPicker(max) {
+    let index = getRandom(0, max);
     let color;
-    if(index == 0){
+    if (index == 0) {
         color = colors.blue;
-    }else if(index == 1){
+    } else if (index == 1) {
         color = colors.green;
-    }else if(index == 2){
+    } else if (index == 2) {
         color = colors.grey;
-    }else if(index == 3){
+    } else if (index == 3) {
         color = colors.purple;
-    }else if(index == 4){
+    } else if (index == 4) {
         color = colors.red;
-    }else if(index == 5){
+    } else if (index == 5) {
         color = colors.yellow;
     }
     return color;

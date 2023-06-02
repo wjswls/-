@@ -1,45 +1,43 @@
 window.addEventListener("resize", resizeSvg);
 
+let visibility = 20;
+let mobility = 20;
+let diversity = 5;
+//
+
+//buttons
+let userSetButton = document.getElementById('userSet');
+userSetButton.onclick = function () {
+    userSetButton.disabled = true;
+    myButton2.disabled = false;
+    visibility = document.getElementById("visibilityValue").textContent;
+    mobility = document.getElementById("mobilityValue").textContent ;
+    diversity = document.getElementById("diversityValue").textContent;
+
+    visibility = Math.abs(visibility);
+    mobility = Math.abs(mobility);
+    diversity = Math.abs(diversity);
+}
 
 
 let myButton = document.getElementById('playButton');
 myButton.onclick = function () {
     play();
+    this.disabled = true;
+    setTimeout(() => {
+        this.disabled = false; // enables the button after 2 seconds
+    }, 1500);
 }
+
+let myButton2 = document.getElementById('SetupButton');
+myButton2.onclick = function () {
+    myButton.disabled = false;
+    setup();
+    this.disabled = true;
+}
+
 
 let replay = document.getElementById('replay');
-
-let visibility, mobility, diversity;
-
-function disableVisSlider() {
-  let slider = document.getElementById('visibility');
-  slider.disabled = true;
-  visibility = slider.value;
-  document.getElementById("visibilityValue").textContent = visibility;
-}
-
-function disableMobSlider() {
-  let slider = document.getElementById('mobility');
-  slider.disabled = true;
-  mobility = slider.value;
-  document.getElementById("mobilityValue").textContent = mobility;
-}
-
-function disableDivSlider() {
-  let slider = document.getElementById('diversity');
-  slider.disabled = true;
-  diversity = slider.value;
-  document.getElementById("diversityValue").textContent = diversity;
-}
-
-function storeAndDisable() {
-  disableVisSlider();
-  disableMobSlider();
-  disableDivSlider();
-  console.log('Visibility:', visibility);
-  console.log('Mobility:', mobility);
-  console.log('Diversity:', diversity);
-}
 
 let startTime = Date.now();
 
@@ -202,7 +200,7 @@ class Tile {
             return;
         }
 
-        if (this.hasTwoSameColorNeighbors(tileArray)) {
+        if (this.hasThreeSameColorNeighbors(tileArray)) {
             this.toBeLeft = true;
             this.toBeDistroyed = false;
             this.toBeConstructed = false;
@@ -285,7 +283,7 @@ class Tile {
 
 
 
-    hasTwoSameColorNeighbors(tileBoard) {
+    hasThreeSameColorNeighbors(tileBoard) {
         // Define the coordinates of the surrounding tiles
         let surroundingCoords = [
             [-1, 0], // above
@@ -311,7 +309,7 @@ class Tile {
             // If the tile has a building and the building's color is the same, increment sameColorCount
             if (tile.hasBuilding && tile.buildingColor === this.buildingColor) {
                 sameColorCount++;
-                if (sameColorCount >= 2) {
+                if (sameColorCount >= 3) {
                     return true;
                 }
             }
@@ -335,36 +333,35 @@ function makeGridArray(rows, cols) {
 }
 
 
-//grid and coloumns setup
-
 const gridArray1 = makeGridArray(rows, cols);
-let backgroundGrid = makeGridArray(rows, cols);
-for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-        backgroundGrid[i][j].drawTile();
-    }
-}
-
-for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-        if (gridArray1[i][j].hasBuilding) {
-            gridArray1[i][j].buildingHeight = getRandom(20, 130);
-            gridArray1[i][j].buildingColor = colorPicker(diversity);
-        }
-    }
-}
-
-
-let t = 500;
-setup();
 
 ////////Main functions;
 function setup() {
 
-    setTimeout(draw, t);
+
+    //grid and coloumns setup
+
+    let backgroundGrid = makeGridArray(rows, cols);
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            backgroundGrid[i][j].drawTile();
+        }
+    }
+
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (gridArray1[i][j].hasBuilding) {
+                gridArray1[i][j].buildingHeight = getRandom(60, 140);
+                gridArray1[i][j].buildingColor = colorPicker(diversity);
+            }
+        }
+    }
+
+
+    draw();
 }
 
-function clearGame(){
+function clearGame() {
     svg.setAttribute("viewBox", `0 0 ${window.innerWidth} ${window.innerHeight}`);
 }
 
@@ -435,11 +432,9 @@ function clear() {
 }
 
 function play() {
-    console.log("pressed");
-
     calculate();
     destroy();
-    setTimeout(deleteDestroy, 800);
-    setTimeout(draw, 1000);
+    setTimeout(deleteDestroy, 600);
+    setTimeout(draw, 650);
 }
 
